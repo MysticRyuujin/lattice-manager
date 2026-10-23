@@ -100,7 +100,14 @@ test("serves assets and falls back to index.html", async ({ request }) => {
     expect(res.status(), asset).toBe(200);
     if (expectNginx) expect(res.headers()["cache-control"], asset).toContain("immutable");
   }
-  if (expectNginx) expect(index.headers()["cache-control"]).toContain("no-cache");
+  if (expectNginx) {
+    expect(index.headers()["cache-control"]).toContain("no-cache");
+    const missing = await request.get("/assets/missing-smoke.js");
+    expect(missing.status()).toBe(404);
+    expect(missing.headers()["cache-control"] ?? "").not.toContain("immutable");
+    // run.sh checks that this value never reaches the access log.
+    expect((await request.get("/?loginCache=SMOKE-SECRET-VALUE")).status()).toBe(200);
+  }
 
   const deep = await request.get("/no/such/page");
   expect(deep.status()).toBe(200);

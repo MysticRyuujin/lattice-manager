@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Usage: run.sh IMAGE EXPECTED_RELAY
 # Starts IMAGE and runs the Playwright smoke test against it. Run `npm ci` first.
-# Set EXPECT_NGINX=1 to also check this fork's nginx cache headers.
+# Set EXPECT_NGINX=1 to also check this fork's nginx cache headers and access log.
 set -euo pipefail
 
 IMAGE=${1:?usage: run.sh IMAGE EXPECTED_RELAY}
@@ -28,3 +28,8 @@ docker run --rm --network "$NET" --ipc=host \
   -e EXPECT_NGINX="${EXPECT_NGINX:-0}" \
   "$PLAYWRIGHT_IMAGE" \
   npx playwright test -c test/e2e/playwright.config.ts
+
+if [ "${EXPECT_NGINX:-0}" = 1 ] && docker logs "$APP" 2>&1 | grep -q "SMOKE-SECRET-VALUE"; then
+  echo "FAIL: a query string reached the access log"
+  exit 1
+fi
