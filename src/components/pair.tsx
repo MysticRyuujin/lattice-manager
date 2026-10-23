@@ -63,7 +63,7 @@ class Pair extends React.Component<any, any> {
     const fontSize = this.getBoxFontHeight();
     const content = (
       <center>
-        <Card title="Enter Secret" bordered={true} id='secret-card'>
+        <Card title="Enter Secret" id='secret-card'>
           <p></p>
           <p>Please enter the pairing secret displayed on your Lattice screen:</p>
           <Input

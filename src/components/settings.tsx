@@ -138,7 +138,7 @@ class Settings extends React.Component<any, any> {
         <h4>Bitcoin Wallet Type</h4>
         <Radio.Group  onChange={this.handleChangeBitcoinVersionSetting.bind(this)}
                       defaultValue={purpose}>
-          <Space direction="vertical">
+          <Space orientation="vertical">
             <Radio value={constants.BTC_PURPOSE_NONE}>
               Hide BTC Wallet
             </Radio>
@@ -199,11 +199,15 @@ class Settings extends React.Component<any, any> {
             <p>
               Manage connections to your Lattice. Third party apps should be listed here if they are connected to your device.
             </p>
-            <Collapse>
-              <Collapse.Panel header={`Connections List (${data.length})`} key='third-party'>
-                <Table dataSource={data} columns={cols}/>
-              </Collapse.Panel>
-            </Collapse>
+            <Collapse
+              items={[
+                {
+                  key: 'third-party',
+                  label: `Connections List (${data.length})`,
+                  children: <Table dataSource={data} columns={cols}/>,
+                },
+              ]}
+            />
           </Col>
         </Row>
       </Card>
@@ -228,7 +232,7 @@ class Settings extends React.Component<any, any> {
   render() {
     const content = (
       <center>
-        <Card title={'Settings'} bordered={true}>
+        <Card title={'Settings'}>
           {this.renderCard()}
         </Card>
       </center>      

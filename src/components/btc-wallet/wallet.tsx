@@ -164,7 +164,7 @@ class Wallet extends React.Component<any, any> {
                 <ClockCircleOutlined /> Pending
               </p>
             }
-            bordered={true}
+           
             style={{ margin: "0 0 30px 0" }}
           >
             <List
@@ -174,7 +174,7 @@ class Wallet extends React.Component<any, any> {
             />
           </Card>
         ) : null}
-        <Card title="Transactions" bordered={true}>
+        <Card title="Transactions">
           <List
             itemLayout="horizontal"
             dataSource={txs.confirmed}
@@ -234,7 +234,7 @@ class Wallet extends React.Component<any, any> {
 
   renderStartCard() {
     return (
-      <Card title={`BTC Wallet`} bordered={true}>
+      <Card title={`BTC Wallet`}>
         <center>
           <p>You have not loaded any addresses yet.</p>
           <Button
@@ -259,7 +259,7 @@ class Wallet extends React.Component<any, any> {
     }
     return (
       <div>
-        <Card title={`BTC Wallet`} bordered={true}>
+        <Card title={`BTC Wallet`}>
           <Row justify="center">
             Last Update&nbsp;{this.renderLastUpdatedTag()}
             <Button

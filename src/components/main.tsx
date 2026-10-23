@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Layout, Menu, PageHeader, Tag, Tooltip } from "antd";
+import { Button, Layout, Menu, Space, Tag, Tooltip } from "antd";
 import {
   HomeOutlined,
   MenuOutlined,
@@ -834,11 +834,10 @@ class Main extends React.Component<any, MainState> {
       </Button>
     );
     return (
-      <PageHeader
-        title={this.renderHeaderText()}
-        ghost={true}
-        extra={!this.state.waiting ? extra : null}
-      />
+      <div className="lattice-page-header">
+        <div className="lattice-page-header-title">{this.renderHeaderText()}</div>
+        {!this.state.waiting && <Space wrap>{extra}</Space>}
+      </div>
     );
   }
 

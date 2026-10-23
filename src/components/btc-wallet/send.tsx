@@ -8,9 +8,9 @@ import {
   InputNumber,
   Empty,
   Statistic,
-  notification,
 } from "antd";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import { notification } from "../../util/notification";
 import { PageContent } from "../index";
 import { allChecks } from "../../util/sendChecks";
 import { constants, buildBtcTxReq, getBtcNumTxBytes } from "../../util/helpers";
@@ -184,7 +184,7 @@ class Send extends React.Component<any, any> {
           console.error(err);
         })
         .finally(() => {
-          notification.close("signNotification");
+          notification.destroy("signNotification");
         });
     }
   }
@@ -412,7 +412,7 @@ class Send extends React.Component<any, any> {
     const content = (
       <center>
         {this.renderBanner()}
-        <Card title={"Send BTC"} bordered={true}>
+        <Card title={"Send BTC"}>
           {this.renderCard()}
         </Card>
       </center>

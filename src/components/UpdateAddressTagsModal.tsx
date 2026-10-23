@@ -1,5 +1,6 @@
 import { MinusSquareFilled } from "@ant-design/icons";
-import { Button, Form, Input, Modal, Space } from "antd";
+import { Button, Form, Modal, Space } from "antd";
+import { AddonInput } from "./AddonInput";
 import { useAddressTags } from "../hooks/useAddressTags";
 import { sendErrorNotification } from "../util/sendErrorNotification";
 
@@ -65,12 +66,12 @@ export const UpdateAddressTagsModal = ({
     <>
       <Modal
         title="Update Address Tags"
-        visible={isModalVisible}
-        maskClosable={false}
+        open={isModalVisible}
+        mask={{ closable: false }}
         onOk={form.submit}
         onCancel={handleCancel}
         width={550}
-        destroyOnClose={true}
+        destroyOnHidden
         footer={[
           <Button type="link" onClick={handleCancel} key="cancel">
             Cancel
@@ -85,7 +86,7 @@ export const UpdateAddressTagsModal = ({
           </Button>,
         ]}
       >
-        <Space direction="vertical" style={{ width: "100%" }}>
+        <Space orientation="vertical" style={{ width: "100%" }}>
           <Form
             form={form}
             name="formData"
@@ -159,8 +160,8 @@ export const UpdateAddressTagsModal = ({
                             // },
                           ]}
                         >
-                          <Input
-                            addonBefore={"Address"}
+                          <AddonInput
+                            addon="Address"
                             data-testid={`${name}-address-input`}
                             disabled={isLoadingAddressTags}
                           />
@@ -203,8 +204,8 @@ export const UpdateAddressTagsModal = ({
                             // },
                           ]}
                         >
-                          <Input
-                            addonBefore={"Name"}
+                          <AddonInput
+                            addon="Name"
                             data-testid={`${name}-name-input`}
                             disabled={isLoadingAddressTags}
                           />

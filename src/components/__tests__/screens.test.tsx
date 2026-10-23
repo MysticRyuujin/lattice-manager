@@ -39,12 +39,8 @@ beforeEach(() => {
   consoleError = vi.spyOn(console, "error").mockImplementation(() => {});
 });
 
-// antd 4 warns about APIs the antd 6 migration replaces; that commit removes this filter.
-const isAntdDeprecation = (args: unknown[]) =>
-  typeof args[0] === "string" && args[0].startsWith("Warning: [antd: ");
-
 afterEach(() => {
-  expect(consoleError.mock.calls.filter((args) => !isAntdDeprecation(args))).toEqual([]);
+  expect(consoleError.mock.calls).toEqual([]);
   consoleError.mockRestore();
 });
 
@@ -71,7 +67,7 @@ describe("screens render", () => {
 
   test("ExplorerPage", async () => {
     renderMockProvider({ children: <ExplorerPage /> });
-    expect(await screen.findByText("Wallet Explorer")).toBeInTheDocument();
+    expect(await screen.findAllByText("Wallet Explorer")).not.toHaveLength(0);
   });
 
   test("BTC Wallet", async () => {

@@ -174,7 +174,7 @@ class ValidateSig extends React.Component<any, any> {
       <Row>
         <Col span={spanLength} offset={spanOffset}>
           <center>
-            <Card title="Validate Hardware" bordered={true}>
+            <Card title="Validate Hardware">
               {this.renderResult()}
               <p>
                 <b>Message:</b> {this.getPreimage()}
@@ -183,7 +183,7 @@ class ValidateSig extends React.Component<any, any> {
             {this.shouldShowClaimCard() && (
               <Card
                 title="Claim POAP"
-                bordered={true}
+               
                 style={{ marginTop: "20px" }}
               >
                 <p>GridPlus is offering POAPs to all valid Lattice1 owners.</p>

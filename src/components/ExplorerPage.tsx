@@ -5,6 +5,7 @@ import {
   Checkbox,
   InputNumber,
   Select,
+  Space,
   Table,
   Tooltip,
 } from "antd";
@@ -25,6 +26,29 @@ import { UpdateAddressTagsModal } from "./UpdateAddressTagsModal";
 
 const { ADDRESSES_PER_PAGE } = constants;
 const { Option } = Select;
+
+const PathSegment = ({
+  disabled,
+  defaultHardened = false,
+  hardened,
+  onHarden,
+  value,
+  onChange,
+}) => (
+  <Space.Compact style={{ width: "125px" }}>
+    <Space.Addon>
+      <Tooltip title="Harden">
+        <Checkbox
+          disabled={disabled}
+          defaultChecked={defaultHardened}
+          onChange={onHarden}
+        />
+      </Tooltip>
+    </Space.Addon>
+    <InputNumber disabled={disabled} controls value={value} onChange={onChange} />
+    <Space.Addon>{hardened ? "'" : ""}</Space.Addon>
+  </Space.Compact>
+);
 
 const ExplorerPage = () => {
   const { addressTags } = useAddressTags();
@@ -199,7 +223,7 @@ const ExplorerPage = () => {
 
   return (
     <PageContent>
-      <Card title={"Wallet Explorer"} bordered>
+      <Card title={"Wallet Explorer"}>
         <div>
           <h3>Standard Derivation Paths</h3>
           <div style={{ paddingBottom: "25px" }}>
@@ -232,93 +256,43 @@ const ExplorerPage = () => {
               flexWrap: "wrap",
             }}
           >
-            <InputNumber
+            <PathSegment
               disabled={isLoading}
-              controls={true}
-              addonBefore={
-                <Tooltip title="Harden">
-                  <Checkbox
-                    disabled={isLoading}
-                    defaultChecked={true}
-                    onChange={(e) => onCheck(e, setIsPurposeHardened)}
-                  />
-                </Tooltip>
-              }
-              addonAfter={`${isPurposeHardened ? "'" : ""}`}
-              onChange={(e) => setPurpose(e)}
-              defaultValue={purpose}
+              defaultHardened
+              hardened={isPurposeHardened}
+              onHarden={(e) => onCheck(e, setIsPurposeHardened)}
               value={purpose}
-              style={{ width: "125px" }}
+              onChange={(e) => setPurpose(e)}
             />
-            <InputNumber
+            <PathSegment
               disabled={isLoading}
-              controls={true}
-              addonBefore={
-                <Tooltip title="Harden">
-                  <Checkbox
-                    disabled={isLoading}
-                    defaultChecked={true}
-                    onChange={(e) => onCheck(e, setIsCoinTypeHardened)}
-                  />
-                </Tooltip>
-              }
-              onChange={(e) => setCoinType(e)}
-              addonAfter={`${isCoinTypeHardened ? "'" : ""}`}
-              defaultValue={coinType}
+              defaultHardened
+              hardened={isCoinTypeHardened}
+              onHarden={(e) => onCheck(e, setIsCoinTypeHardened)}
               value={coinType}
-              style={{ width: "125px" }}
+              onChange={(e) => setCoinType(e)}
             />
-            <InputNumber
+            <PathSegment
               disabled={isLoading}
-              controls={true}
-              addonBefore={
-                <Tooltip title="Harden">
-                  <Checkbox
-                    disabled={isLoading}
-                    defaultChecked={true}
-                    onChange={(e) => onCheck(e, setIsAccountHardened)}
-                  />
-                </Tooltip>
-              }
-              onChange={(e) => setAccount(e)}
-              addonAfter={`${isAccountHardened ? "'" : ""}`}
-              defaultValue={account}
+              defaultHardened
+              hardened={isAccountHardened}
+              onHarden={(e) => onCheck(e, setIsAccountHardened)}
               value={account}
-              style={{ width: "125px" }}
+              onChange={(e) => setAccount(e)}
             />
-            <InputNumber
+            <PathSegment
               disabled={isLoading}
-              controls={true}
-              addonBefore={
-                <Tooltip title="Harden">
-                  <Checkbox
-                    disabled={isLoading}
-                    onChange={(e) => onCheck(e, setIsChangeHardened)}
-                  />
-                </Tooltip>
-              }
-              onChange={(e) => setChange(e)}
-              addonAfter={`${isChangeHardened ? "'" : ""}`}
-              defaultValue={change}
+              hardened={isChangeHardened}
+              onHarden={(e) => onCheck(e, setIsChangeHardened)}
               value={change}
-              style={{ width: "125px" }}
+              onChange={(e) => setChange(e)}
             />
-            <InputNumber
+            <PathSegment
               disabled={isLoading}
-              controls={true}
-              addonBefore={
-                <Tooltip title="Harden">
-                  <Checkbox
-                    disabled={isLoading}
-                    onChange={(e) => onCheck(e, setIsIndexHardened)}
-                  />
-                </Tooltip>
-              }
-              onChange={(e) => setIndex(e)}
-              addonAfter={`${isIndexHardened ? "'" : ""}`}
-              defaultValue={index}
+              hardened={isIndexHardened}
+              onHarden={(e) => onCheck(e, setIsIndexHardened)}
               value={index}
-              style={{ width: "125px" }}
+              onChange={(e) => setIndex(e)}
             />
             <Button
               onClick={() => getAddrs()}
@@ -344,7 +318,7 @@ const ExplorerPage = () => {
             rowKey={(record) => record.address}
             loading={{
               spinning: isLoading,
-              tip: "Loading...",
+              description: "Loading...",
               indicator: <LoadingOutlined />,
             }}
             pagination={false}

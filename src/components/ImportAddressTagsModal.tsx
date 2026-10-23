@@ -44,11 +44,11 @@ export const ImportAddressTagsModal = ({
   return (
     <Modal
       title="Add Address Tags"
-      visible={isModalVisible}
-      maskClosable={false}
+      open={isModalVisible}
+      mask={{ closable: false }}
       onOk={handleOnSubmit}
       onCancel={handleCancel}
-      destroyOnClose={true}
+      destroyOnHidden
       footer={[
         <Button type="link" onClick={handleCancel} key="cancel">
           Cancel
@@ -63,7 +63,7 @@ export const ImportAddressTagsModal = ({
         </Button>,
       ]}
     >
-      <Space direction="vertical" style={{ width: "100%" }}>
+      <Space orientation="vertical" style={{ width: "100%" }}>
         <input
           type={"file"}
           id={"csvFileInput"}
