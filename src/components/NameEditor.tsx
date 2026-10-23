@@ -47,7 +47,7 @@ export const NameEditor = ({
         <Button type="text" onClick={onCancel} data-testid={`${name}-cancel`}>
           Cancel
         </Button>
-        <Button type="ghost" htmlType="submit" data-testid={`${name}-save`}>
+        <Button ghost htmlType="submit" data-testid={`${name}-save`}>
           Save
         </Button>
       </Form.Item>

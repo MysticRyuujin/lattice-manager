@@ -7,7 +7,7 @@ export const AddAddressTagsButton = ({ showModal }) => {
 
   return (
     <Button
-      type="ghost"
+      ghost
       onClick={showModal}
       disabled={isLoadingAddressTags}
       icon={<PlusOutlined />}

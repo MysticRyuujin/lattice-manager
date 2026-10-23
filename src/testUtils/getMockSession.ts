@@ -1,3 +1,4 @@
+import { vi } from "vitest";
 import SDKSession from "../sdk/sdkSession";
 import { AddressTag } from "../types/records";
 import { ContractRecord } from "./../types/contracts";
@@ -75,14 +76,18 @@ export const getMockSession = (
 ): SDKSession => ({
   client: {
     // AddressTags
-    addKvRecords: jest.fn(async (records) => records),
-    getKvRecords: jest.fn(async () => mockKvResponse),
-    removeKvRecords: jest.fn(async () => true),
+    addKvRecords: vi.fn(async (records) => records),
+    getKvRecords: vi.fn(async () => mockKvResponse),
+    removeKvRecords: vi.fn(async () => true),
 
     //Contracts
-    getAbiRecords: jest.fn(async () => mockContractResponse),
-    removeAbiRecords: jest.fn(async () => true),
-    addAbiDefs: jest.fn(async (defs) => defs),
+    getAbiRecords: vi.fn(async () => mockContractResponse),
+    removeAbiRecords: vi.fn(async () => true),
+    addAbiDefs: vi.fn(async (defs) => defs),
+
+    // Device
+    getFwVersion: vi.fn(() => ({ fix: 0, minor: 18, major: 0 })),
+    getAddresses: vi.fn(async () => []),
     ...clientOverrides,
   },
   ...overrides,

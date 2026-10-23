@@ -1,27 +1,34 @@
-import React from "react";
-import * as Sentry from "@sentry/react";
-import "antd/dist/antd.dark.min.css";
+import React, { useEffect } from "react";
+import { App as AntApp, ConfigProvider, theme } from "antd";
+import "antd/dist/reset.css";
 import "./styles.css";
 import { Main } from "./components";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 import { AppContextProvider } from "./store/AppContext";
+import { setNotificationInstance } from "./util/notification";
+
+const darkTheme = { algorithm: theme.darkAlgorithm };
+
+function NotificationBridge() {
+  const { notification } = AntApp.useApp();
+  useEffect(() => setNotificationInstance(notification), [notification]);
+  return null;
+}
 
 function App() {
   return (
-    <Sentry.ErrorBoundary
-      fallback={({ error, resetError }) => (
-        <div style={{ padding: "20px", textAlign: "center" }}>
-          <h1>Something went wrong</h1>
-          <p>{error instanceof Error ? error.message : "An unexpected error occurred"}</p>
-          <button onClick={resetError}>Try again</button>
-        </div>
-      )}
-    >
-      <div className="App">
-        <AppContextProvider>
-          <Main />
-        </AppContextProvider>
-      </div>
-    </Sentry.ErrorBoundary>
+    <ErrorBoundary>
+      <ConfigProvider theme={darkTheme}>
+        <AntApp>
+          <NotificationBridge />
+          <div className="App">
+            <AppContextProvider>
+              <Main />
+            </AppContextProvider>
+          </div>
+        </AntApp>
+      </ConfigProvider>
+    </ErrorBoundary>
   );
 }
 

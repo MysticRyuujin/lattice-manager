@@ -183,7 +183,7 @@ const XpubPage: React.FC<XpubPageProps> = ({ session }) => {
     <center>
       <Card
         title={"BTC Extended Public Key (XPUB)"}
-        bordered={true}
+       
         id="xpub-card"
       >
         <center>{renderCard()}</center>

@@ -10,7 +10,7 @@ const SEARCH_ID = "address-data";
 
 class Receive extends React.Component<any, any> {
   static contextType = AppContext;
-  context = this.context as any;
+  declare context: any;
   constructor(props) {
     super(props);
 
@@ -116,7 +116,7 @@ class Receive extends React.Component<any, any> {
   render() {
     const content = (
       <center>
-        <Card title={"Receive BTC"} bordered={true} id="receive-card">
+        <Card title={"Receive BTC"} id="receive-card">
           <center>{this.renderCard()}</center>
         </Card>
       </center>

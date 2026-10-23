@@ -45,7 +45,7 @@ const AddressTagsPage = () => {
 
   return (
     <PageContent>
-      <Card title={"Address Tags"} extra={extra} bordered>
+      <Card title={"Address Tags"} extra={extra}>
         <AddressTagsTable />
       </Card>
       <AddAddressTagsModal

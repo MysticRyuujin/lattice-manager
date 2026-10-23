@@ -2,71 +2,58 @@
   "name": "lattice-manager",
   "version": "0.6.0",
   "private": true,
-  "homepage": "https://lattice.gridplus.io/",
   "dependencies": {
-    "@ethereumjs/tx": "^4.0.2",
-    "@fortawesome/fontawesome-free": "^6.2.0",
-    "@fortawesome/fontawesome-svg-core": "^6.2.0",
-    "@fortawesome/free-brands-svg-icons": "^6.2.0",
-    "@fortawesome/free-solid-svg-icons": "^6.2.0",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "@sentry/react": "^10.17.0",
-    "@solana/web3.js": "^1.63.1",
-    "antd": "^4.21.3",
+    "@ant-design/icons": "^6.3.4",
+    "@fortawesome/fontawesome-free": "^7.3.1",
+    "@fortawesome/fontawesome-svg-core": "^7.3.1",
+    "@fortawesome/free-brands-svg-icons": "^7.3.1",
+    "@fortawesome/free-solid-svg-icons": "^7.3.1",
+    "@fortawesome/react-fontawesome": "^3.5.0",
+    "@solana/web3.js": "^3.1.1",
+    "antd": "^6.6.7",
     "bech32": "^2.0.0",
-    "bignumber.js": "^9.0.2",
-    "bs58check": "^2.1.2",
+    "bignumber.js": "^11.1.5",
+    "bs58": "^6.0.0",
+    "bs58check": "^4.0.0",
     "buffer": "^6.0.3",
-    "elliptic": "^6.5.4",
-    "fuzzysort": "^2.0.1",
+    "elliptic": "^6.6.1",
+    "fuzzysort": "^4.0.2",
     "gridplus-react-crypto": "0.0.5",
-    "gridplus-sdk": "3.4.0",
-    "gulp": "^4.0.2",
-    "nanoid": "^4.0.0",
-    "papaparse": "^5.3.2",
-    "qrcode.react": "^3.0.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "gridplus-sdk": "^4.0.0",
+    "lodash": "^4.18.1",
+    "papaparse": "^5.7.0",
+    "qrcode.react": "^4.2.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
   },
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
-    "docker-run": "npm run build && npm run start",
     "serve": "vite preview",
     "test": "vitest"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^14.2.1",
-    "@types/jest": "^28.1.2",
-    "@types/node": "^18.0.0",
-    "@types/react": "^18.0.14",
-    "@types/react-dom": "^18.0.5",
-    "@vitejs/plugin-react": "^3.0.1",
-    "jsdom": "^21.1.0",
-    "typescript": "^4.7.4",
-    "vite": "^4.0.4",
-    "vite-plugin-node-polyfills": "^0.7.0",
-    "vitest": "^0.28.1"
+    "@playwright/test": "1.64.1",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.8",
+    "@types/node": "^24.19.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "jsdom": "^30.1.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5",
+    "vite-plugin-node-polyfills": "^0.28.0",
+    "vitest": "^5.0.5"
   },
-  "msw": {
-    "workerDirectory": "public"
+  "engines": {
+    "node": ">=24"
   },
-  "packageManager": "pnpm@10.17.1+sha512.17c560fca4867ae9473a3899ad84a88334914f379be46d455cbf92e5cf4b39d34985d452d2583baf19967fa76cb5c17bc9e245529d0b98745721aa7200ecaf7a"
+  "overrides": {
+    "@metamask/utils": {
+      "uuid": "^11.1.1"
+    }
+  }
 }

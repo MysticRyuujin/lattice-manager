@@ -25,7 +25,7 @@ const Landing = ({ goToPage }) => {
     <PageContent>
       <Card
         style={{ textAlign: "center" }}
-        headStyle={{ fontSize: "32px" }}
+        styles={{ header: { fontSize: "32px" } }}
         title="Lattice Manager"
       >
         <div
@@ -99,11 +99,13 @@ const Landing = ({ goToPage }) => {
           </div>
           <div>
             <Card
-              bodyStyle={{
-                display: "flex",
-                flexWrap: "wrap",
-                alignItems: "center",
-                justifyContent: "center",
+              styles={{
+                body: {
+                  display: "flex",
+                  flexWrap: "wrap",
+                  alignItems: "center",
+                  justifyContent: "center",
+                },
               }}
             >
               <img

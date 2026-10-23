@@ -7,7 +7,7 @@ class Loading extends React.Component<any, any> {
   render() {
     const content = (
       <center>
-        <Card title="Loading" bordered={true}>
+        <Card title="Loading">
           {this.props.spin !== false ? (
             <Spin indicator={<LoadingOutlined />} />
           ) : null}

@@ -76,11 +76,11 @@ export const AddressTagsTable = () => {
         tableLayout="fixed"
         loading={{
           spinning: isLoadingAddressTags,
-          tip: "Loading...",
+          description: "Loading...",
           indicator: <LoadingOutlined />,
         }}
         pagination={{
-          position: ["bottomCenter"],
+          placement: ["bottomCenter"],
           pageSize: ADDRESSES_PER_PAGE,
           defaultCurrent: 1,
           showSizeChanger: false,

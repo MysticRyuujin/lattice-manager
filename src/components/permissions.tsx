@@ -15,9 +15,9 @@ import {
   Col,
   Dropdown,
   Input,
-  Menu,
   Row,
   Select,
+  Space,
   Spin,
 } from "antd";
 import { LoadingOutlined, QuestionCircleOutlined } from "@ant-design/icons";
@@ -156,13 +156,10 @@ class Permissions extends React.Component<any, any> {
       </Select>
     );
 
-    const currencyMenu = (
-      <Menu onClick={this.updateAsset}>
-        {Object.keys(assets).map((key) => {
-          return <Menu.Item key={key}>{key}</Menu.Item>;
-        })}
-      </Menu>
-    );
+    const currencyMenu = {
+      items: Object.keys(assets).map((key) => ({ key, label: key })),
+      onClick: this.updateAsset,
+    };
 
     return (
       <div>
@@ -193,7 +190,7 @@ class Permissions extends React.Component<any, any> {
         </p>
         <Row>
           <Col span={12} offset={6}>
-            <Dropdown overlay={currencyMenu}>
+            <Dropdown menu={currencyMenu}>
               <Button>{this.state.asset.name}</Button>
             </Dropdown>
           </Col>
@@ -218,13 +215,15 @@ class Permissions extends React.Component<any, any> {
         </p>
         <Row>
           <Col span={12} offset={6}>
-            <Input
-              type="text"
-              id="permission-window"
-              addonAfter={timeMultiplierSelect}
-              value={this.state.window}
-              onChange={this.updateWindow.bind(this)}
-            />
+            <Space.Compact block>
+              <Input
+                type="text"
+                id="permission-window"
+                value={this.state.window}
+                onChange={this.updateWindow.bind(this)}
+              />
+              {timeMultiplierSelect}
+            </Space.Compact>
           </Col>
         </Row>
         <br />
@@ -255,7 +254,7 @@ class Permissions extends React.Component<any, any> {
               </h3>
             </div>
           }
-          bordered={true}
+         
         >
           {this.renderCard()}
         </Card>

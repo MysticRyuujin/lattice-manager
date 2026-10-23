@@ -7,12 +7,9 @@ export default defineConfig(({ mode }) => ({
   define: {
     APP_VERSION: JSON.stringify(process.env.npm_package_version),
     ENV: JSON.stringify(process.env.ENV),
-    BASE_SIGNING_URL: JSON.stringify(process.env.VITE_BASE_SIGNING_URL),
     BTC_DEFAULT_FEE_RATE: JSON.stringify(process.env.VITE_BTC_DEFAULT_FEE_RATE),
     BTC_TX_BASE_URL: JSON.stringify(process.env.VITE_BTC_TX_BASE_URL),
     BTC_TESTNET: JSON.stringify(process.env.VITE_BTC_TESTNET),
-    SENTRY_DSN: JSON.stringify(process.env.VITE_SENTRY_DSN),
-    SENTRY_ENVIRONMENT: JSON.stringify(process.env.VITE_SENTRY_ENVIRONMENT),
     "process.env": {},
   },
   server: {
@@ -21,12 +18,18 @@ export default defineConfig(({ mode }) => ({
   test: {
     globals: true,
     environment: "jsdom",
+    setupFiles: ["./src/setupTests.ts"],
+    exclude: ["**/node_modules/**", "test/e2e/**"],
+    // gridplus-sdk's ESM build imports a directory, which Node's loader rejects.
+    server: { deps: { inline: ["gridplus-sdk"] } },
   },
   plugins: [react(), nodePolyfills()],
   optimizeDeps: {
-    esbuildOptions: {
-      define: {
-        global: "globalThis",
+    rolldownOptions: {
+      transform: {
+        define: {
+          global: "globalThis",
+        },
       },
     },
   },

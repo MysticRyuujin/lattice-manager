@@ -1,0 +1,30 @@
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+    ignore:
+      # Types must match the runtime major (Node 24). Bump both together by hand.
+      - dependency-name: "@types/node"
+        update-types: [version-update:semver-major]
+      # The smoke test pins the Playwright container to this exact version.
+      - dependency-name: "@playwright/test"
+
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+    ignore:
+      # Move to the next Node LTS by hand, together with @types/node and .nvmrc.
+      - dependency-name: node
+        update-types: [version-update:semver-major]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

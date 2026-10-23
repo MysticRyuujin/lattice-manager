@@ -28,7 +28,7 @@ type ConnectState = {
 
 class Connect extends React.Component<ConnectProps, ConnectState> {
   static contextType = AppContext;
-  context = this.context as any;
+  declare context: any;
 
   constructor(props) {
     super(props);
@@ -272,7 +272,7 @@ class Connect extends React.Component<ConnectProps, ConnectState> {
         <Modal
           title="Settings"
           footer={null}
-          visible={this.state.modal}
+          open={this.state.modal}
           onOk={this.hideModal.bind(this)}
           onCancel={this.hideModal.bind(this)}
         >
@@ -289,7 +289,7 @@ class Connect extends React.Component<ConnectProps, ConnectState> {
               : "Lattice Connector 🔗"
           }
           footer={null}
-          visible={this.state.modal}
+          open={this.state.modal}
           onOk={this.hideModal.bind(this)}
           onCancel={this.hideModal.bind(this)}
         >
@@ -331,7 +331,7 @@ class Connect extends React.Component<ConnectProps, ConnectState> {
         {this.renderModal()}
         <Col span={spanWidth} offset={spanOffset}>
           <center>
-            <Card bordered={true} style={{ marginTop: "30px" }}>
+            <Card style={{ marginTop: "30px" }}>
               <a
                 className="lattice-a"
                 href="https://gridplus.io/lattice"

@@ -1,4 +1,4 @@
-import "@testing-library/vi-dom/extend-expect";
+import "@testing-library/jest-dom/vitest";
 import { vi } from "vitest";
 
 Object.defineProperty(globalThis, "matchMedia", {

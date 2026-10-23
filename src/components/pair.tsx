@@ -6,7 +6,7 @@ const SUBMIT_LEN = 8; // 8 characters in a code
 
 class Pair extends React.Component<any, any> {
   static contextType = AppContext;
-  context = this.context as any;
+  declare context: any;
 
   constructor(props) {
     super(props);
@@ -63,7 +63,7 @@ class Pair extends React.Component<any, any> {
     const fontSize = this.getBoxFontHeight();
     const content = (
       <center>
-        <Card title="Enter Secret" bordered={true} id='secret-card'>
+        <Card title="Enter Secret" id='secret-card'>
           <p></p>
           <p>Please enter the pairing secret displayed on your Lattice screen:</p>
           <Input

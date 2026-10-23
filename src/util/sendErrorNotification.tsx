@@ -1,4 +1,5 @@
-import { Button, notification } from "antd";
+import { Button } from "antd";
+import { notification } from "./notification";
 
 export const sendErrorNotification = ({
   message,
@@ -20,7 +21,7 @@ export const sendErrorNotification = ({
       size="small"
       onClick={() => {
         onClick();
-        notification.close(key);
+        notification.destroy(key);
       }}
     >
       Retry
