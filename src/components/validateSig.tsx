@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Card, Col, Result, Row } from "antd";
-import { decode } from "bs58";
+import bs58 from "bs58";
 import { constants } from "../util/helpers";
 import { AppContext } from "../store/AppContext";
 import { ResultStatusType } from "antd/lib/result";
@@ -67,13 +67,18 @@ class ValidateSig extends React.Component<any, any> {
     return key.verify(msgHash, sig);
   }
 
+  // bs58 6 returns a Uint8Array; the slicing below relies on Buffer's toString and hex.
+  decodeData() {
+    return Buffer.from(bs58.decode(this.props.data));
+  }
+
   getPreimage() {
-    return decode(this.props.data).slice(0, PREIMAGE_LEN).toString();
+    return this.decodeData().slice(0, PREIMAGE_LEN).toString();
   }
 
   getCert() {
     const start = PREIMAGE_LEN + SIG_TEMPLATE_LEN;
-    const _certData = decode(this.props.data).slice(
+    const _certData = this.decodeData().slice(
       start,
       start + CERT_TEMPLATE_LEN
     );
@@ -114,7 +119,7 @@ class ValidateSig extends React.Component<any, any> {
       const preimage = this.getPreimage();
       const cert = this.getCert();
       const _sig = Buffer.from(
-        decode(this.props.data).slice(
+        this.decodeData().slice(
           PREIMAGE_LEN,
           PREIMAGE_LEN + SIG_TEMPLATE_LEN
         )
