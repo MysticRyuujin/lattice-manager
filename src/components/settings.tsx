@@ -6,6 +6,20 @@ import omit from "lodash/omit"
 import { constants, getBtcPurpose } from '../util/helpers';
 import localStorage from '../util/localStorage';
 
+export const getEndpointError = (value: string) => {
+  try {
+    const url = new URL(value);
+    if (url.protocol !== "http:" && url.protocol !== "https:") {
+      return "Invalid protocol";
+    } else if (value.charAt(value.length - 1) === "/") {
+      return 'URL cannot end with "/"';
+    }
+    return "";
+  } catch (e) {
+    return "Invalid URL: Must contain only valid URL characters and either 'http://' or 'https://`";
+  }
+};
+
 class Settings extends React.Component<any, any> {
   constructor(props) {
     super(props);
@@ -20,6 +34,13 @@ class Settings extends React.Component<any, any> {
 
 
   submit() {
+    // Check the stored value, not this.state.error: focusing the field clears the error.
+    const endpoint = this.state.settings.customEndpoint;
+    const error = endpoint ? getEndpointError(endpoint) : "";
+    if (error) {
+      this.setState({ error });
+      return;
+    }
     // Save the settings to localStorage
     localStorage.setSettings(this.state.settings)
     // Reload the page for the changes to take effect
@@ -42,22 +63,7 @@ class Settings extends React.Component<any, any> {
   }
 
   validateEndpoint(evt) {
-    const value = evt.target.value;
-    try {
-      const url = new URL(value);
-      if (url.protocol !== "http:" && url.protocol !== "https:") {
-        this.setState({ error: "Invalid protocol" });
-      } else if (value.charAt(value.length - 1) === "/") {
-        this.setState({ error: 'URL cannot end with "/"' });
-      } else {
-        this.setState({ error: "" });
-      }
-    } catch (e) {
-      this.setState({
-        error:
-          "Invalid URL: Must contain only valid URL characters and either 'http://' or 'https://`",
-      });
-    }
+    this.setState({ error: getEndpointError(evt.target.value) });
   }
 
   removeKeyring ({ name }) {
