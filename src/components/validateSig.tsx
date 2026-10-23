@@ -13,7 +13,7 @@ const CERT_TEMPLATE_LEN = 147; // Struct containing pubkey, permissions, and sig
 
 class ValidateSig extends React.Component<any, any> {
   static contextType = AppContext;
-  context = this.context as any;
+  declare context: any;
   isLoading: boolean;
   poapToClaim: string;
   isValid: string;

@@ -2,7 +2,6 @@
   "name": "lattice-manager",
   "version": "0.6.0",
   "private": true,
-  "homepage": "https://lattice.gridplus.io/",
   "dependencies": {
     "@ethereumjs/tx": "^4.0.2",
     "@fortawesome/fontawesome-free": "^6.2.0",
@@ -31,43 +30,26 @@
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
-    "docker-run": "npm run build && npm run start",
     "serve": "vite preview",
     "test": "vitest"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
   "devDependencies": {
     "@playwright/test": "1.64.1",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^14.2.1",
-    "@types/jest": "^28.1.2",
-    "@types/node": "^18.0.0",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.8",
+    "@types/node": "^24.19.2",
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
-    "@vitejs/plugin-react": "^3.0.1",
-    "jsdom": "^21.1.0",
-    "typescript": "^4.7.4",
-    "vite": "^4.0.4",
-    "vite-plugin-node-polyfills": "^0.7.0",
-    "vitest": "^0.28.1"
+    "@vitejs/plugin-react": "^6.1.2",
+    "jsdom": "^30.1.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5",
+    "vite-plugin-node-polyfills": "^0.28.0",
+    "vitest": "^5.0.5"
   },
-  "msw": {
-    "workerDirectory": "public"
-  },
-  "packageManager": "pnpm@10.17.1+sha512.17c560fca4867ae9473a3899ad84a88334914f379be46d455cbf92e5cf4b39d34985d452d2583baf19967fa76cb5c17bc9e245529d0b98745721aa7200ecaf7a"
+  "engines": {
+    "node": ">=24"
+  }
 }

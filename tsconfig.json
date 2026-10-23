@@ -9,13 +9,13 @@
     "strict": false,
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noImplicitAny": false,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["node", "jest", "@testing-library/jest-dom", "vite/client"],
+    "types": ["node", "vitest/globals", "vite/client"],
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src"]

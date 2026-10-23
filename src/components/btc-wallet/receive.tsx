@@ -10,7 +10,7 @@ const SEARCH_ID = "address-data";
 
 class Receive extends React.Component<any, any> {
   static contextType = AppContext;
-  context = this.context as any;
+  declare context: any;
   constructor(props) {
     super(props);
 

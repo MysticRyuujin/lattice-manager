@@ -20,12 +20,16 @@ export default defineConfig(({ mode }) => ({
   test: {
     globals: true,
     environment: "jsdom",
+    setupFiles: ["./src/setupTests.ts"],
+    exclude: ["**/node_modules/**", "test/e2e/**"],
   },
   plugins: [react(), nodePolyfills()],
   optimizeDeps: {
-    esbuildOptions: {
-      define: {
-        global: "globalThis",
+    rolldownOptions: {
+      transform: {
+        define: {
+          global: "globalThis",
+        },
       },
     },
   },

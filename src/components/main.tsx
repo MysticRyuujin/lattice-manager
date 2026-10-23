@@ -65,7 +65,7 @@ type MainState = {
 
 class Main extends React.Component<any, MainState> {
   static contextType = AppContext;
-  context = this.context as any;
+  declare context: any;
 
   constructor(props) {
     super(props);
