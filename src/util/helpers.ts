@@ -6,7 +6,8 @@ import { Buffer } from "buffer";
 const HARDENED_OFFSET = 0x80000000;
 export const constants = {
   DEFAULT_APP_NAME: "Lattice Manager",
-  BASE_SIGNING_URL: "https://signing.gridpl.us",
+  BASE_SIGNING_URL:
+    import.meta.env.VITE_BASE_SIGNING_URL || "https://signing.gridpl.us",
   BTC_PROD_DATA_API: "https://blockchain.info",
   BTC_BROADCAST_ENDPOINT: "https://blockstream.info/api/tx",
   HARDENED_OFFSET,
