@@ -84,6 +84,10 @@ export const getMockSession = (
     getAbiRecords: vi.fn(async () => mockContractResponse),
     removeAbiRecords: vi.fn(async () => true),
     addAbiDefs: vi.fn(async (defs) => defs),
+
+    // Device
+    getFwVersion: vi.fn(() => ({ fix: 0, minor: 18, major: 0 })),
+    getAddresses: vi.fn(async () => []),
     ...clientOverrides,
   },
   ...overrides,

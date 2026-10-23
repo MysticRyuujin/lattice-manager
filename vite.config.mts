@@ -20,6 +20,8 @@ export default defineConfig(({ mode }) => ({
     environment: "jsdom",
     setupFiles: ["./src/setupTests.ts"],
     exclude: ["**/node_modules/**", "test/e2e/**"],
+    // gridplus-sdk's ESM build imports a directory, which Node's loader rejects.
+    server: { deps: { inline: ["gridplus-sdk"] } },
   },
   plugins: [react(), nodePolyfills()],
   optimizeDeps: {
