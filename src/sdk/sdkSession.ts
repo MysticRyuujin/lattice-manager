@@ -347,17 +347,13 @@ class SDKSession {
 
   async sign(req) {
     // Get the tx payload to broadcast
-    return this.client.sign(req).then((res) => {
-      if (res && res.tx) {
-        broadcastBtcTx(res.tx, (err, txid) => {
-          if (err)
-            throw new Error(`Error broadcasting transaction: ${err.message}`);
-          return txid;
-        });
-      } else {
-        throw new Error("Signing transaction invalid.");
-      }
-    });
+    const res = await this.client.sign(req);
+    if (!res || !res.tx) throw new Error("Signing transaction invalid.");
+    try {
+      return await broadcastBtcTx(res.tx);
+    } catch (err) {
+      throw new Error(`Error broadcasting transaction: ${err.message}`);
+    }
   }
 
   _genPrivKey(deviceID, pw, name) {

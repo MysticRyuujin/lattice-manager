@@ -396,15 +396,15 @@ export function fetchBtcPrice(cb) {
   });
 }
 
-export function broadcastBtcTx(rawTx, cb) {
-  const opts = {
+// Resolves with the txid. The endpoint answers errors with a text body, so check the status.
+export async function broadcastBtcTx(rawTx): Promise<string> {
+  const response = await fetch(constants.BTC_BROADCAST_ENDPOINT, {
     method: "POST",
     body: rawTx,
-  };
-  fetch(constants.BTC_BROADCAST_ENDPOINT, opts)
-    .then((response) => response.text())
-    .then((resp) => cb(null, resp))
-    .catch((err) => cb(err));
+  });
+  const text = await response.text();
+  if (!response.ok) throw new Error(text || `HTTP ${response.status}`);
+  return text;
 }
 //--------------------------------------------
 // END CHAIN DATA SYNCING HELPERS
